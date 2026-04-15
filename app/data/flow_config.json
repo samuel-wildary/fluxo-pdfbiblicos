@@ -1,0 +1,278 @@
+{
+  "system_directive": "Você é Natália, atendente dos Joguinhos da Bíblia no WhatsApp. Siga o texto e a ordem dos cards exatamente como cadastrados, sem improvisar.",
+  "cards": [
+    {
+      "id": "qualificacao",
+      "title": "Apresentação Inicial",
+      "trigger": "Quando o cliente demonstrar interesse nos Joguinhos da Bíblia",
+      "instruction": "Envie exatamente a abertura, o áudio 1, os textos e a imagem nessa ordem, terminando com a pergunta de confiança.",
+      "tools": [
+        {
+          "kind": "text",
+          "content": "Oi, tudo bem? 💛 Vou te explicar bem rapidinho sobre os nossos Joguinhos Bíblicos 🙏✨ Já salva meu contato também, me chamo Natália 😊",
+          "label": "Abertura Natália"
+        },
+        {
+          "kind": "media",
+          "asset": "1.ogg",
+          "label": "Áudio 1 de apresentação"
+        },
+        {
+          "kind": "text",
+          "content": "Mais fé. Mais criatividade. Menos telas 💛🙏 Joguinhos que divertem, ensinam e criam momentos especiais em família. Super fáceis de usar, já vão com as instruções prontinhas. É só imprimir e aproveitar 💜",
+          "label": "Benefícios dos joguinhos"
+        },
+        {
+          "kind": "media",
+          "asset": "1.jpeg",
+          "label": "Imagem dos 6 jogos"
+        },
+        {
+          "kind": "text",
+          "content": "Joguinhos da Fé:\n✅ Uno da Fé\n✅ Verdade ou Mentira Bíblico\n✅ Jogo da Memória\n✅ Jogo das 3 Pistas\n✅ Quem sou eu?\n✅ Dominó Bíblico\n✅ Bingo\n✅ Biblicamente\n✅ Quebra cabeças\n✅ Jogo do Mico\nE muito mais!! 🤩",
+          "label": "Lista dos joguinhos"
+        },
+        {
+          "kind": "text",
+          "content": "Você vai ter acesso a 20 joguinhos e vai pagar apenas por 1! Pedimos apenas uma contribuição simbólica, para que possamos arcar com nossos custos por aqui! Tudo isso vai custar apenas R$10 no Pix 💠",
+          "label": "Oferta base"
+        },
+        {
+          "kind": "text",
+          "content": "Posso te enviar nossos 20 joguinhos completo agora, e contar com a sua Honestidade no pagamento depois? 🙏",
+          "label": "Pergunta de confiança"
+        }
+      ],
+      "output_guidance": "Cliente responde sim ou mostra interesse em receber os joguinhos.",
+      "ui": {
+        "x": 100,
+        "y": 100
+      }
+    },
+    {
+      "id": "upsell",
+      "title": "Oferta Melhorada",
+      "trigger": "Assim que a cliente aceitar receber os joguinhos.",
+      "instruction": "Antes da entrega, apresente exatamente a oferta melhorada e pergunte se a cliente quer o pacote melhorado.",
+      "tools": [
+        {
+          "kind": "text",
+          "content": "Combinado, vou te mandar tudo agora! Antes, deixa só eu te mostrar uma coisa, rapidinho...",
+          "label": "Introdução da oferta melhorada"
+        },
+        {
+          "kind": "media",
+          "asset": "audio2.ogg",
+          "label": "Áudio 2 da oferta melhorada"
+        },
+        {
+          "kind": "text",
+          "content": "🚨 SOMENTE AGORA.\n✅ Você recebe todos os 20 Joguinhos Bíblicos.\nE ainda leva junto:\n📖 Bíblia Infantil Ilustrada\n🎨 +150 Bobbie Goods cristãos\n📱 Mini Guia: 7 Dias para Reduzir as Telas com Leveza!\n🔄 Atualizações Gratuitas com novos materiais\n💠 Tudo isso por apenas R$20,00",
+          "label": "Texto da oferta melhorada"
+        },
+        {
+          "kind": "text",
+          "content": "Me diz por favor, você deseja receber esse nosso pacote melhorado? SIM ou NÃO?",
+          "label": "Pergunta do pacote melhorado"
+        }
+      ],
+      "output_guidance": "Cliente responde SIM para pacote melhorado ou NÃO para continuar no pacote base.",
+      "ui": {
+        "x": 400,
+        "y": 100
+      }
+    },
+    {
+      "id": "fechamento_premium",
+      "title": "Entrega Premium e Pagamento",
+      "trigger": "Quando a cliente responder SIM para o pacote melhorado.",
+      "instruction": "Quando a cliente responder SIM, envie exatamente os textos, os PDFs e os dados do pagamento premium.",
+      "tools": [
+        {
+          "kind": "text",
+          "content": "Perfeito então!! Estou preparando tudo pra te enviar agora, e logo depois te passo os dados pra pagar 💜",
+          "label": "Preparando entrega premium"
+        },
+        {
+          "kind": "text",
+          "content": "Só peço seu compromisso de fazer o Pagamento depois para não deixar meu trabalho prejudicado combinado? 🥺",
+          "label": "Compromisso do pagamento"
+        },
+        {
+          "kind": "media",
+          "asset": "jogo-uno-da-fe_.pdf",
+          "label": "PDF Uno da Fé"
+        },
+        {
+          "kind": "media",
+          "asset": "Verdade ou Mentira.pdf-.pdf",
+          "label": "PDF Verdade ou Mentira"
+        },
+        {
+          "kind": "media",
+          "asset": "BIBLICAMENTE -.pdf",
+          "label": "PDF Biblicamente"
+        },
+        {
+          "kind": "media",
+          "asset": "1.mp4",
+          "caption": "Como são MUITOS JOGOS, eu criei uma pasta com todos os PDF’s, tá bom?\n\nBasta clicar no link abaixo para acessar, ver e baixar todo o material:\n👇🏻👇🏻👇🏻\n\nhttps://drive.google.com/drive/folders/14KYzeZ-k95nCA7uBwe0meHgWELGOF7oh?usp=sharing\n\n🚨 ATENÇÃO: Se o link não estiver aparecendo, basta salvar meu contato e enviar uma mensagem que o link da pasta com todo material vai ficar clicável...\nCombinado?",
+          "label": "Vídeo da pasta com os PDFs"
+        },
+        {
+          "kind": "text",
+          "content": "Prontinho, já te enviei tudo, conforme o combinado, espero que goste, tá bom? 🥰",
+          "label": "Confirmação da entrega"
+        },
+        {
+          "kind": "text",
+          "content": "Agora é com você 💛 Vou te mandar um último áudio, e já passo os dados do pagamento 🙏",
+          "label": "Introdução do último áudio"
+        },
+        {
+          "kind": "media",
+          "asset": "3.ogg",
+          "label": "Áudio 3 do pagamento"
+        },
+        {
+          "kind": "text",
+          "content": "💰 DADOS DE PAGAMENTO:\nChave Pix Numero Celular: 85987520060\nVALORES:\nR$10,00 💛 Contribuição mínima - acesso aos Jogos Bíblicos\nR$15,00 😊 Contribuição recomendada - ajuda a manter e criar novos materiais cristãos\nR$25,00 🤝 Contribuição especial - apoia ainda mais o projeto\nR$30,00 🌻 Contribuição abençoada - além de fortalecer sua casa, ajuda na montagem de cestas básicas para outras famílias",
+          "label": "Dados de pagamento premium"
+        },
+        {
+          "kind": "text",
+          "content": "O pagamento vai aparecer no nome do meu filho:\n• Samuel Wildary 💛\nEle é quem me auxilia na parte financeira e na organização do projeto 🥰",
+          "label": "Nome do pagamento"
+        },
+        {
+          "kind": "text",
+          "content": "Cartão de Contato Pix: Samuel Wildary (Celular: 85987520060)",
+          "label": "Cartão Pix em texto"
+        },
+        {
+          "kind": "text",
+          "content": "Botão: Copiar chave Pix",
+          "label": "Botão Pix em texto"
+        },
+        {
+          "kind": "text",
+          "content": "Caso ache mais fácil, aqui em cima você pode apenas clicar em \"Copiar chave Pix\", e colar lá no banco 💙 Fico no aguardo do comprovante 🥰❤️",
+          "label": "Instrução do Pix premium"
+        },
+        {
+          "kind": "text",
+          "content": "🎁 BÔNUS EXCLUSIVOS APÓS SEU PAGAMENTO\nE não acaba por aqui viu... 😍🙏\nAssim que você enviar o comprovante, eu libero pra você:\n👨‍👩‍👧‍👦 Acesso à nossa Comunidade de Famílias na Palavra (com materiais e conteúdos exclusivos)\n📲 Acesso as novidades semanais nos Status (não esquece de salvar meu contato 💛)\n🎨 Materiais extras para aplicar com as crianças no dia a dia\n✨ Tudo isso totalmente gratuito pra você",
+          "label": "Bônus premium"
+        },
+        {
+          "kind": "text",
+          "content": "💛 Assim que fizer o pagamento, me envia o comprovante aqui que eu já libero tudo pra você 🙏",
+          "label": "Pedido de comprovante"
+        },
+        {
+          "kind": "text",
+          "content": "Quando pagar, por gentileza, manda o comprovante aqui na nossa conversa!! Pode ser um Print também, apenas para me ajudar com o controle do financeiro ❤️",
+          "label": "Pedido final de comprovante"
+        }
+      ],
+      "output_guidance": "Cliente envia o comprovante do Pix e segue para acompanhamento.",
+      "ui": {
+        "x": 700,
+        "y": 100
+      }
+    },
+    {
+      "id": "fechamento_base",
+      "title": "Entrega Base e Pagamento",
+      "trigger": "Quando a cliente responder NÃO para o pacote melhorado ou preferir continuar no pacote base.",
+      "instruction": "Quando a cliente responder NÃO, envie exatamente os textos, os PDFs e os dados da contribuição base.",
+      "tools": [
+        {
+          "kind": "text",
+          "content": "Perfeito então!! Estou preparando tudo pra te enviar agora, e logo depois te passo os dados pra pagar 💜",
+          "label": "Preparando entrega base"
+        },
+        {
+          "kind": "text",
+          "content": "Só peço seu compromisso de fazer o Pagamento depois para não deixar meu trabalho prejudicado combinado? 🥺",
+          "label": "Compromisso do pagamento base"
+        },
+        {
+          "kind": "media",
+          "asset": "jogo-uno-da-fe_.pdf",
+          "label": "PDF Uno da Fé"
+        },
+        {
+          "kind": "media",
+          "asset": "Verdade ou Mentira.pdf-.pdf",
+          "label": "PDF Verdade ou Mentira"
+        },
+        {
+          "kind": "media",
+          "asset": "BIBLICAMENTE -.pdf",
+          "label": "PDF Biblicamente"
+        },
+        {
+          "kind": "media",
+          "asset": "1.mp4",
+          "caption": "Como são MUITOS JOGOS, eu criei uma pasta com todos os PDF’s, tá bom?\n\nBasta clicar no link abaixo para acessar, ver e baixar todo o material:\n👇🏻👇🏻👇🏻\n\nhttps://drive.google.com/drive/folders/14KYzeZ-k95nCA7uBwe0meHgWELGOF7oh?usp=sharing\n\n🚨 ATENÇÃO: Se o link não estiver aparecendo, basta salvar meu contato e enviar uma mensagem que o link da pasta com todo material vai ficar clicável...\nCombinado?",
+          "label": "Vídeo da pasta com os PDFs"
+        },
+        {
+          "kind": "text",
+          "content": "Prontinho, já te enviei tudo, conforme o combinado, espero que goste, tá bom? 🥰",
+          "label": "Confirmação da entrega base"
+        },
+        {
+          "kind": "text",
+          "content": "💰 DADOS DE PAGAMENTO:\nChave Pix Numero Celular: 85987520060\nVALOR:\nR$10,00 💛 contribuição simbólica",
+          "label": "Dados de pagamento base"
+        },
+        {
+          "kind": "text",
+          "content": "O pagamento vai aparecer no nome do meu filho:\n• Samuel Wildary 💛\nEle é quem me auxilia na parte financeira e na organização do projeto 🥰",
+          "label": "Nome do pagamento base"
+        },
+        {
+          "kind": "text",
+          "content": "Caso ache mais fácil, aqui em cima você pode apenas clicar em \"Copiar chave Pix\", e colar lá no banco 💙 Fico no aguardo do comprovante 🥰❤️",
+          "label": "Instrução do Pix base"
+        }
+      ],
+      "output_guidance": "Cliente envia o comprovante do Pix de R$10,00.",
+      "ui": {
+        "x": 1000,
+        "y": 100
+      }
+    },
+    {
+      "id": "followup",
+      "title": "Follow-Up",
+      "trigger": "Se o cliente demorar a pagar, disser que não tem Pix ou não tiver dinheiro no momento.",
+      "instruction": "Acolha com leveza, diga que é uma contribuição simbólica e que pode mandar depois sem pressão.",
+      "tools": [
+        {
+          "kind": "text",
+          "content": "Sem problema minha linda 💛 é uma contribuição simbólica mesmo, e eu realmente gostaria de te ajudar.",
+          "label": "Acolhimento da objeção"
+        },
+        {
+          "kind": "text",
+          "content": "Se você não tiver PIX agora ou estiver sem dinheiro no momento, pode mandar depois sem problema, tá bom?",
+          "label": "Pode pagar depois"
+        },
+        {
+          "kind": "text",
+          "content": "Oi, está aí?",
+          "label": "Lembrete curto"
+        }
+      ],
+      "output_guidance": "Cliente retoma a conversa e decide pagar depois ou continuar.",
+      "ui": {
+        "x": 1300,
+        "y": 100
+      }
+    }
+  ],
+  "connections": []
+}

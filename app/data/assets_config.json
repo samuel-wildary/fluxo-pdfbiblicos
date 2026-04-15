@@ -1,0 +1,61 @@
+{
+  "global_initial_delay": 0,
+  "files": {
+    "audio1.ogg": {
+      "presence": "recording",
+      "delay_seconds": 4
+    },
+    "audio2.ogg": {
+      "presence": "recording",
+      "delay_seconds": 4
+    },
+    "audio3.ogg": {
+      "presence": "recording",
+      "delay_seconds": 3
+    },
+    "audio4.ogg": {
+      "presence": "recording",
+      "delay_seconds": 4
+    },
+    "audio5.ogg": {
+      "presence": "recording",
+      "delay_seconds": 5
+    },
+    "audio6.ogg": {
+      "presence": "recording",
+      "delay_seconds": 4
+    },
+    "imagen1.png": {
+      "presence": "composing",
+      "delay_seconds": 2
+    },
+    "imagen2.png": {
+      "presence": "composing",
+      "delay_seconds": 2
+    },
+    "imagen3.jpeg": {
+      "presence": "composing",
+      "delay_seconds": 2
+    },
+    "imagen4.jpeg": {
+      "presence": "composing",
+      "delay_seconds": 2
+    },
+    "jogo-uno-da-fe.pdf": {
+      "presence": "composing",
+      "delay_seconds": 3
+    },
+    "Verdade ou Mentira pdf.pdf": {
+      "presence": "composing",
+      "delay_seconds": 3
+    },
+    "BIBLICAMENTE-.pdf": {
+      "presence": "composing",
+      "delay_seconds": 3
+    },
+    "Gelatina-Bariatrica.pdf": {
+      "presence": "composing",
+      "delay_seconds": 3
+    }
+  }
+}
