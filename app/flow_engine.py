@@ -73,7 +73,10 @@ def contains_number(text: str) -> bool:
     return bool(re.search(r"\b\d{1,3}\b", text))
 
 
-def is_acceptance(text: str) -> bool:
+def is_acceptance(text: str, message_type: str = "text") -> bool:
+    if message_type == "audio":
+        return True
+    
     acceptance_terms = [
         "sim",
         "pode",
@@ -129,7 +132,7 @@ def is_price_objection(text: str) -> bool:
     return any(keyword in text for keyword in keywords)
 
 
-def is_payment_commitment(text: str) -> bool:
+def is_payment_commitment(text: str, message_type: str = "text") -> bool:
     commitment_terms = [
         "vou fazer",
         "vou pagar",
@@ -142,7 +145,7 @@ def is_payment_commitment(text: str) -> bool:
         "depois eu mando",
         "entendi",
     ]
-    return is_acceptance(text) or any(term in text for term in commitment_terms)
+    return is_acceptance(text, message_type) or any(term in text for term in commitment_terms)
 
 
 def is_hard_refusal(text: str) -> bool:
@@ -330,6 +333,9 @@ class FlowEngine:
             return "", []
 
         state = self.session_store.get_agent_state(chat_id)
+        if state.get("finished"):
+            return "", []
+
         current_card_index = int(state.get("current_card_index", 0) or 0)
         current_card_index = max(0, min(current_card_index, len(cards) - 1))
         first_card_sent = bool(state.get("first_card_sent", False))
@@ -349,12 +355,12 @@ class FlowEngine:
 
         if awaiting_payment or current_card_index >= 2:
             if is_payment_completion_signal(user_text, message_type):
-                self.session_store.set_agent_state(chat_id, {"awaiting_payment": False})
+                self.session_store.set_agent_state(chat_id, {"awaiting_payment": False, "finished": True})
                 return "Perfeito, meu bem 💛 assim que eu confirmar aqui, continuo com voce.", []
 
             if is_hard_refusal(user_text):
-                self.session_store.set_agent_state(chat_id, {"awaiting_payment": False})
-                return "Tudo bem, meu bem. Se mudar de ideia ou quiser tirar alguma duvida sobre a receita, eu estou por aqui.", []
+                self.session_store.set_agent_state(chat_id, {"awaiting_payment": False, "finished": True})
+                return "Tudo bem, meu bem. Se mudar de ideia ou quiser tirar alguma duvida sobre os joguinhos, eu estou por aqui.", []
 
             if is_price_objection(user_text) and len(cards) > 4:
                 self.session_store.set_agent_state(chat_id, {"current_card_index": 4, "awaiting_payment": True})
@@ -366,22 +372,22 @@ class FlowEngine:
                     [],
                 )
 
-            if is_payment_commitment(user_text):
+            if is_payment_commitment(user_text, message_type):
                 return (
                     "Fica tranquila, meu bem 💛 quando conseguir fazer a contribuicao, me manda o comprovante por aqui. Se tiver qualquer duvida sobre os joguinhos, pode me chamar.",
                     [],
                 )
 
-            return "Tudo certinho 💛 quando conseguir fazer a contribuicao, me chama por aqui.", []
+            return "", []
 
         if current_card_index == 0:
-            if is_acceptance(user_text):
+            if is_acceptance(user_text, message_type):
                 self.session_store.set_agent_state(chat_id, {"current_card_index": 1})
                 return "", card_to_actions(cards[1])
             return "", []
 
         if current_card_index == 1:
-            if is_acceptance(user_text):
+            if is_acceptance(user_text, message_type):
                 target_index = 2
                 while target_index < len(cards) - 1 and not card_to_actions(cards[target_index]):
                     target_index += 1
@@ -399,7 +405,7 @@ class FlowEngine:
             return "", []
 
         if current_card_index == 2:
-            if is_acceptance(user_text):
+            if is_acceptance(user_text, message_type):
                 target_index = 2
                 while target_index < len(cards) - 1 and not card_to_actions(cards[target_index]):
                     target_index += 1
