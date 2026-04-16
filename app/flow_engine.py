@@ -80,6 +80,7 @@ def is_acceptance(text: str, message_type: str = "text") -> bool:
     
     acceptance_terms = [
         "sim",
+        "s",
         "pode",
         "quero",
         "manda",
@@ -97,6 +98,11 @@ def is_acceptance(text: str, message_type: str = "text") -> bool:
         "continuar",
         "seguir",
     ]
+    # Usando regex para garantir que a letra "s" isolada seja aceita como "sim",
+    # sem aceitar "s" no meio de uma palavra aleatoria.
+    if text.strip() == "s":
+        return True
+        
     return any(term in text for term in acceptance_terms)
 
 
@@ -104,6 +110,8 @@ def is_negative_response(text: str) -> bool:
     negative_terms = [
         "nao",
         "não",
+        "n",
+        "ñ",
         "nao quero",
         "não quero",
         "prefiro o simples",
@@ -112,6 +120,10 @@ def is_negative_response(text: str) -> bool:
         "so o comum",
         "só o comum",
     ]
+    
+    if text.strip() in {"n", "ñ"}:
+        return True
+        
     return any(term in text for term in negative_terms)
 
 
