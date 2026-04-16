@@ -367,12 +367,14 @@ class FlowEngine:
                 return "", card_to_actions(cards[4])
 
             if is_recipe_question(user_text):
+                self.session_store.set_agent_state(chat_id, {"awaiting_payment": False, "finished": True})
                 return (
                     "Pode seguir os arquivos e as instrucoes que te enviei 💛 se travar em alguma parte dos joguinhos ou da impressao, me fala qual que eu te explico melhor.",
                     [],
                 )
 
             if is_payment_commitment(user_text, message_type):
+                self.session_store.set_agent_state(chat_id, {"awaiting_payment": False, "finished": True})
                 return (
                     "Fica tranquila, meu bem 💛 quando conseguir fazer a contribuicao, me manda o comprovante por aqui. Se tiver qualquer duvida sobre os joguinhos, pode me chamar.",
                     [],
@@ -421,12 +423,13 @@ class FlowEngine:
 
         if current_card_index == 2:
             if is_acceptance(user_text, message_type):
-                target_index = 2
+                target_index = 3
                 while target_index < len(cards) - 1 and not card_to_actions(cards[target_index]):
                     target_index += 1
                 self.session_store.set_agent_state(chat_id, {"current_card_index": target_index, "awaiting_payment": True})
                 return "", card_to_actions(cards[target_index])
             if is_price_objection(user_text) and len(cards) > 4:
+                self.session_store.set_agent_state(chat_id, {"current_card_index": 4, "awaiting_payment": True})
                 return "", card_to_actions(cards[4])
             return "", []
 
