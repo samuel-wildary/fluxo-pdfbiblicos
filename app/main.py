@@ -269,6 +269,17 @@ def health() -> dict[str, str]:
     return {"status": "ok"}
 
 
+@app.get("/api/reset/{phone}")
+def reset_phone(phone: str):
+    """Zera completamente a memoria e a conversa de um cliente"""
+    # Limpa as chaves normais e as chaves com sufixos do WhatsApp
+    for chat_id in [phone, f"{phone}@s.whatsapp.net", f"{phone}@c.us"]:
+        session_store.clear_session(chat_id)
+        session_store.clear_agent_state(chat_id)
+        session_store.redis.delete(f"incoming_buffer:{chat_id}")
+    return {"status": "success", "message": f"Conversa zerada para o numero {phone}"}
+
+
 @app.post("/api/test-capi", dependencies=[Depends(verify_credentials)])
 def test_capi(payload: TestCapiPayload):
     if not settings.fb_pixel_id or not settings.fb_access_token:
