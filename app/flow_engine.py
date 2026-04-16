@@ -574,10 +574,10 @@ class FlowEngine:
         # (ex: 1 segundo a cada 30 caracteres)
         base_typing_time = 0.0
         if text_length is not None and text_length > 0:
-            base_typing_time = min(text_length / 30.0, 10.0) # Limita em no máximo 10s extra para textos gigantes
+            base_typing_time = min(text_length / 60.0, 3.0) # Limita em no máximo 3s extra para textos gigantes
             
         min_delay = max(min_delay, base_typing_time + 1.0)
-        max_delay = max(max_delay, base_typing_time + 3.0)
+        max_delay = max(max_delay, base_typing_time + 4.0)
 
         if min_delay < 0:
             min_delay = 0
