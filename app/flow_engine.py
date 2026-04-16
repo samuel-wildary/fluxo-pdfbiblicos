@@ -315,7 +315,7 @@ class FlowEngine:
                 to=resolved_phone,
                 presence="composing",
                 reason="resposta em texto",
-                max_override=6,
+                text_length=len(reply_text),
             )
             self.client.send_text(to=resolved_phone, text=reply_text)
 
@@ -489,7 +489,7 @@ class FlowEngine:
                     to=to,
                     presence="composing",
                     reason="acao de texto",
-                    max_override=6,
+                    text_length=len(text_val),
                 )
                 self.client.send_text(to=to, text=text_val)
                 continue
@@ -564,10 +564,20 @@ class FlowEngine:
         self,
         min_override: float | None = None,
         max_override: float | None = None,
+        text_length: int | None = None,
     ) -> float:
         assets_config = load_assets_config()
         min_delay = float(assets_config.get("human_delay_min_seconds", DEFAULT_HUMAN_DELAY_MIN_SECONDS) or DEFAULT_HUMAN_DELAY_MIN_SECONDS)
         max_delay = float(assets_config.get("human_delay_max_seconds", DEFAULT_HUMAN_DELAY_MAX_SECONDS) or DEFAULT_HUMAN_DELAY_MAX_SECONDS)
+
+        # Se for um texto, adiciona um tempo base de digitação proporcional ao tamanho do texto
+        # (ex: 1 segundo a cada 30 caracteres)
+        base_typing_time = 0.0
+        if text_length is not None and text_length > 0:
+            base_typing_time = min(text_length / 30.0, 10.0) # Limita em no máximo 10s extra para textos gigantes
+            
+        min_delay = max(min_delay, base_typing_time + 1.0)
+        max_delay = max(max_delay, base_typing_time + 3.0)
 
         if min_delay < 0:
             min_delay = 0
@@ -591,8 +601,13 @@ class FlowEngine:
         reason: str,
         min_override: float | None = None,
         max_override: float | None = None,
+        text_length: int | None = None,
     ) -> None:
-        delay_seconds = self._pick_human_delay_seconds(min_override=min_override, max_override=max_override)
+        delay_seconds = self._pick_human_delay_seconds(
+            min_override=min_override, 
+            max_override=max_override,
+            text_length=text_length
+        )
         self.client.send_presence(to=to, presence=presence)
         logger.info("Aplicando delay humano de %.1f segundos antes de %s", delay_seconds, reason)
         time.sleep(delay_seconds)
