@@ -5,6 +5,7 @@ import logging
 import random
 import re
 import time
+import threading
 from pathlib import Path
 from typing import Any
 from urllib.parse import quote
@@ -363,7 +364,6 @@ class FlowEngine:
                 return "Tudo bem, meu bem. Se mudar de ideia ou quiser tirar alguma duvida sobre os joguinhos, eu estou por aqui.", []
 
             if is_price_objection(user_text) and len(cards) > 4:
-                self.session_store.set_agent_state(chat_id, {"current_card_index": 4, "awaiting_payment": True})
                 return "", card_to_actions(cards[4])
 
             if is_recipe_question(user_text):
@@ -398,10 +398,25 @@ class FlowEngine:
                         "awaiting_payment": target_index >= 2,
                     },
                 )
+                if target_index >= 2:
+                    self._schedule_followup(chat_id, 30 * 60, "30m")
+                    self._schedule_followup(chat_id, 10 * 3600, "10h")
                 return "", card_to_actions(cards[target_index])
-            if is_negative_response(user_text) and len(cards) > 3:
-                self.session_store.set_agent_state(chat_id, {"current_card_index": 3, "awaiting_payment": True})
-                return "", card_to_actions(cards[3])
+            if is_negative_response(user_text):
+                target_index = 3
+                while target_index < len(cards) - 1 and not card_to_actions(cards[target_index]):
+                    target_index += 1
+                self.session_store.set_agent_state(
+                    chat_id,
+                    {
+                        "current_card_index": target_index,
+                        "awaiting_payment": target_index >= 2,
+                    },
+                )
+                if target_index >= 2:
+                    self._schedule_followup(chat_id, 30 * 60, "30m")
+                    self._schedule_followup(chat_id, 10 * 3600, "10h")
+                return "", card_to_actions(cards[target_index])
             return "", []
 
         if current_card_index == 2:
@@ -412,11 +427,41 @@ class FlowEngine:
                 self.session_store.set_agent_state(chat_id, {"current_card_index": target_index, "awaiting_payment": True})
                 return "", card_to_actions(cards[target_index])
             if is_price_objection(user_text) and len(cards) > 4:
-                self.session_store.set_agent_state(chat_id, {"current_card_index": 4, "awaiting_payment": True})
                 return "", card_to_actions(cards[4])
             return "", []
 
         return "", []
+
+    def _schedule_followup(self, chat_id: str, delay_seconds: int, followup_type: str) -> None:
+        def task():
+            time.sleep(delay_seconds)
+            state = self.session_store.get_agent_state(chat_id)
+            if not state.get("awaiting_payment") or state.get("finished"):
+                return
+            
+            if state.get(f"followup_{followup_type}_sent"):
+                return
+            
+            flow_config = load_flow_config()
+            cards = flow_config.get("cards", [])
+            if len(cards) < 5:
+                return
+            
+            followup_card = cards[4]
+            tools = followup_card.get("tools", [])
+            action = None
+            if followup_type == "30m" and len(tools) > 0:
+                action = tools[0]
+            elif followup_type == "10h" and len(tools) > 1:
+                action = tools[1]
+                
+            if action:
+                self.session_store.set_agent_state(chat_id, {f"followup_{followup_type}_sent": True})
+                # Evita problemas com o chat_id no phone
+                self._execute_actions(card_to_actions({"tools": [action]}), chat_id, chat_id)
+                
+        thread = threading.Thread(target=task, daemon=True)
+        thread.start()
 
     def _execute_actions(self, actions: list[dict[str, Any]], chat_id: str, phone: str) -> None:
         to = extract_phone(phone or chat_id)
