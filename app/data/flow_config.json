@@ -9,7 +9,7 @@
       "tools": [
         {
           "kind": "text",
-          "content": "Oi, tudo bem? 💛 Vou te explicar bem rapidinho sobre os nossos Joguinhos Bíblicos 🙏✨ Já salva meu contato também, me chamo Natália 😊",
+          "content": "Oi, tudo bem? 💛\nVou te explicar bem rapidinho sobre os nossos Joguinhos Bíblicos 🙏✨\n\nJá salva meu contato também, me chamo Natália 🥰",
           "label": "Abertura Natália"
         },
         {
@@ -19,7 +19,7 @@
         },
         {
           "kind": "text",
-          "content": "São mais de 20 joguinhos (Uno da Fé, Quem Sou Eu, Bingo e muito mais). Todos super fáceis de usar, é só imprimir e criar momentos especiais em família longe das telas 💜",
+          "content": "Mais fé.\nMais criatividade.\nMenos telas 💛🙏\n\nJoguinhos que divertem, ensinam e criam momentos especiais em família.\n\nSuper fáceis de usar: já vão com as instruções prontinhas.\nÉ só imprimir e aproveitar �",
           "label": "Benefícios dos joguinhos"
         },
         {
@@ -29,7 +29,17 @@
         },
         {
           "kind": "text",
-          "content": "Nós trabalhamos com um modelo de confiança. Você recebe acesso a todo o material agora e faz uma contribuição simbólica de apenas R$10 no Pix depois. Posso liberar o seu acesso agora mesmo? 🙏",
+          "content": "Joguinhos da Fé\n\n✅Uno da Fé\n✅Verdade ou Mentira Bíblico\n✅Jogo da Memória\n✅Jogo das 3 Pistas\n✅Quem sou eu?\n✅Dominó Biblico\n✅Bingo\n✅Biblicamente\n✅Quebra cabeças\n✅Jogo do Mico\n\nE muito mais!!",
+          "label": "Lista dos joguinhos"
+        },
+        {
+          "kind": "text",
+          "content": "Você vai ter acesso a 20 joguinhos e vai pagar apenas por 1!\n\nPedimos apenas uma contribuição simbólica, para que possamos arcar com nossos custos por aqui!\n\nTudo isso vai custar apenas R$10 no Pix💠",
+          "label": "Oferta base"
+        },
+        {
+          "kind": "text",
+          "content": "Posso te enviar nossos 20 joguinhos completo agora, e contar com a sua Honestidade no pagamento depois? 🙏",
           "label": "Pergunta de confiança"
         }
       ],
